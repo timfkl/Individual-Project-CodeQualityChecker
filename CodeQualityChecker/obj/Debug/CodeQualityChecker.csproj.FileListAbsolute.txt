@@ -1,0 +1,10 @@
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\bin\Debug\CodeQualityChecker.exe.config
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\bin\Debug\CodeQualityChecker.exe
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\bin\Debug\CodeQualityChecker.pdb
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.csproj.AssemblyReference.cache
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.Form1.resources
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.Properties.Resources.resources
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.csproj.GenerateResource.cache
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.csproj.CoreCompileInputs.cache
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.exe
+C:\Users\Timothy\Documents\AC40001 Individual Project\CodeQualityChecker\CodeQualityChecker\obj\Debug\CodeQualityChecker.pdb
