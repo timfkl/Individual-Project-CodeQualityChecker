@@ -11,16 +11,21 @@ namespace CodeQualityChecker
     class Tester
     {
         //List of file names
-        private readonly List<string> fileList;
+        private readonly List<CodeFile> fileList;
         //List of arrays of file contents separated by line
-        private List<string[]> fileListContent;
+        //private Tuple<List<string>,List<string[]>> fileListContent;
+        
 
-        public Tester(List<string> fileList)
+        public Tester(List<CodeFile> fileList)
         {
             this.fileList = fileList;
         }
 
-        public void RunTests() { }
+        public void RunTests() 
+        {
+            InitializeFileListContent();
+            CheckSpaces();
+        }
         public void InitializeDoxygen()
         {
 
@@ -28,31 +33,38 @@ namespace CodeQualityChecker
 
         public void InitializeFileListContent()
         {
-            foreach (string file in fileList){
+            foreach (CodeFile file in fileList){
                 string[] textFileContent;
-                textFileContent = File.ReadAllLines(file, Encoding.UTF8);
-                fileListContent.Add(textFileContent);
+                textFileContent = File.ReadAllLines(file.FileName, Encoding.UTF8);
+                file.FileContent = textFileContent;
             }
         }
         public void CheckSpaces()
         {
-            int i = 0;
-            foreach (string[] fileContent in fileListContent)
+            
+            foreach (CodeFile file in fileList)
             {
-                CheckSpacesHelper(fileContent);
+                Console.WriteLine(file.FileName);
+                
+                file.FileIndentations = CheckSpacesHelper(file.FileContent);
+
+
             }
         }
 
-        public List<int> CheckSpacesHelper(string[] fileContent)
+        public int[] CheckSpacesHelper(string[] fileContent)
         {
-            List<int> indentList = new List<int>();
-            int count = 0;
+            int[] indentList = new int[fileContent.Length];
+            int spaceCount = 0;
+            int lineNum = 1;
             foreach (string line in fileContent)
             {
-                count = line.TakeWhile(Char.IsWhiteSpace).Count();
-                indentList.Add(count);
-
+                spaceCount = line.TakeWhile(Char.IsWhiteSpace).Count();
+                indentList.Append(spaceCount);
+                //Console.WriteLine(lineNum + ": " + spaceCount);
+                lineNum++;
             }
+            
             return indentList;
         }
 

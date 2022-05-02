@@ -9,21 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Security;
+using System.Diagnostics;
 
 namespace CodeQualityChecker
 {
-    public partial class Form1 : Form
+    public partial class SelectionForm : Form
     {
-        private List<string> fileList;
+        private List<CodeFile> fileList;
         private OpenFileDialog fileSelectionDialog = new OpenFileDialog();
         private string doxygenFile;
         private OpenFileDialog doxygenFileSelect = new OpenFileDialog();
         Tester runTests;
 
-        public Form1()
+        public SelectionForm()
         {
             fileSelectionDialog = new OpenFileDialog();
-            fileList = new List<string>();
+            fileList = new List<CodeFile>();
             InitializeComponent();
         }
 
@@ -58,7 +59,7 @@ namespace CodeQualityChecker
                     
                     try
                     {
-                        fileList.Add(file);
+                        fileList.Add(new CodeFile(file));
                         //string temp = File.ReadAllText(file);
                         Console.WriteLine(file);
                         //Console.WriteLine(temp);
@@ -108,7 +109,7 @@ namespace CodeQualityChecker
                 catch (Exception ex)
                 {
                     // Could not load the image - probably related to Windows file system permissions.
-                    MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\'))
+                    MessageBox.Show("Cannot display the image: " + doxygenFile.Substring(doxygenFile.LastIndexOf('\\'))
                         + ". You may not have permission to read the file, or " +
                         "it may be corrupt.\n\nReported error: " + ex.Message);
                 }
@@ -119,15 +120,49 @@ namespace CodeQualityChecker
         {
             
         }
-
+        /**
+         * Runs the Tests if there are any files already selected
+         */
         private void RunButton_Click(object sender, EventArgs e)
         {
             if (fileList.Count() > 0)
             {
                 runTests = new Tester(fileList);
+                runTests.RunTests();
             }
         }
+        /**
+         * Runs terminal to run Doxygen with the selected directory. Will get back to this later
+         */
+        private void RunDoxygen_Click(object sender, EventArgs e)
+        {
+            if (doxygenFile.Contains("doxygen.exe"))
+            {
+                //https://stackoverflow.com/questions/14243911/how-to-run-doxygen-from-c-sharp-and-pass-in-config-through-stdin
+                ProcessStartInfo start = new ProcessStartInfo();
+                // Enter in the command line arguments, everything you would enter after the executable name itself
+                start.Arguments = " -";
+                // Enter the executable to run, including the complete path
+                start.FileName = doxygenFile;
+                // Do you want to show a console window?
+                start.WindowStyle = ProcessWindowStyle.Normal;
+                start.CreateNoWindow = false;
+                start.RedirectStandardInput = true;
+                start.UseShellExecute = false;
 
-        
+                // Run the external process & wait for it to finish
+                /*using (Process proc = Process.Start(start))
+                {
+                    //doxygenProperties is just a dictionary
+                    foreach (string key in doxygenProperties.Keys)
+                        proc.StandardInput.WriteLine(key + " = " + doxygenProperties[key]);
+                    proc.StandardInput.Close();
+                    proc.WaitForExit();
+
+                    // Retrieve the app's exit code
+                    int exitCode = proc.ExitCode;
+                }*/
+            }
+        }
     }
 }

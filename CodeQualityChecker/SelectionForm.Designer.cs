@@ -1,7 +1,7 @@
 ﻿
 namespace CodeQualityChecker
 {
-    partial class Form1
+    partial class SelectionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,7 @@ namespace CodeQualityChecker
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.FileDisplay = new System.Windows.Forms.RichTextBox();
             this.FileSelect = new System.Windows.Forms.Button();
+            this.RunDoxygen = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@ namespace CodeQualityChecker
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.RunDoxygen);
             this.panel1.Controls.Add(this.FindDoxygen);
             this.panel1.Controls.Add(this.RunButton);
             this.panel1.Controls.Add(this.textBox1);
@@ -63,7 +65,7 @@ namespace CodeQualityChecker
             // 
             // FindDoxygen
             // 
-            this.FindDoxygen.Location = new System.Drawing.Point(315, 112);
+            this.FindDoxygen.Location = new System.Drawing.Point(251, 104);
             this.FindDoxygen.Name = "FindDoxygen";
             this.FindDoxygen.Size = new System.Drawing.Size(120, 32);
             this.FindDoxygen.TabIndex = 5;
@@ -83,7 +85,7 @@ namespace CodeQualityChecker
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(462, 159);
+            this.textBox1.Location = new System.Drawing.Point(251, 142);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(165, 22);
@@ -101,7 +103,7 @@ namespace CodeQualityChecker
             // 
             // FileSelect
             // 
-            this.FileSelect.Location = new System.Drawing.Point(500, 62);
+            this.FileSelect.Location = new System.Drawing.Point(500, 78);
             this.FileSelect.Name = "FileSelect";
             this.FileSelect.Size = new System.Drawing.Size(127, 37);
             this.FileSelect.TabIndex = 1;
@@ -109,13 +111,23 @@ namespace CodeQualityChecker
             this.FileSelect.UseVisualStyleBackColor = true;
             this.FileSelect.Click += new System.EventHandler(this.FileSelect_Click);
             // 
-            // Form1
+            // RunDoxygen
+            // 
+            this.RunDoxygen.Location = new System.Drawing.Point(251, 171);
+            this.RunDoxygen.Name = "RunDoxygen";
+            this.RunDoxygen.Size = new System.Drawing.Size(120, 32);
+            this.RunDoxygen.TabIndex = 6;
+            this.RunDoxygen.Text = "Run Doxygen";
+            this.RunDoxygen.UseVisualStyleBackColor = true;
+            this.RunDoxygen.Click += new System.EventHandler(this.RunDoxygen_Click);
+            // 
+            // SelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
-            this.Name = "Form1";
+            this.Name = "SelectionForm";
             this.Text = "Code Quality Checker";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
@@ -133,6 +145,7 @@ namespace CodeQualityChecker
         private System.Windows.Forms.RichTextBox FileDisplay;
         private System.Windows.Forms.Button RunButton;
         private System.Windows.Forms.Button FindDoxygen;
+        private System.Windows.Forms.Button RunDoxygen;
     }
 }
 
