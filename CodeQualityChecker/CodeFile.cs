@@ -8,18 +8,33 @@ namespace CodeQualityChecker
 {
     class CodeFile
     {
-
+        
         private string _fileName;
         private string[] _fileContent;
         private int[] _fileIndentations;
+        private List<Tuple<int, bool>> _comparisonStatements;
 
         public CodeFile(string fileName)
         {
             FileName = fileName;
+            _comparisonStatements = new List<Tuple<int, bool>>();
         }
-
+        /**
+         * The name of the file including directory
+         */
         public string FileName { get => _fileName; set => _fileName = value; }
+        /**
+         * An array containing the contents of the file where each string is a line
+         */
         public string[] FileContent { get => _fileContent; set => _fileContent = value; }
+        /**
+         * An array of how much each line is indented, most of the times a tab is counted as two spaces
+         */
         public int[] FileIndentations { get => _fileIndentations; set => _fileIndentations = value; }
+        /**
+         * A List of Tuples of an int + a bool.
+         *The integer is the line number (starting from 0), and the bool being true means that the comparison uses = instead of a normal operator
+         */
+        public List<Tuple<int, bool>> ComparisonStatements { get => _comparisonStatements; set => _comparisonStatements = value; }
     }
 }

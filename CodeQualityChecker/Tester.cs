@@ -25,6 +25,7 @@ namespace CodeQualityChecker
         {
             InitializeFileListContent();
             CheckSpaces();
+            EqualityOperatorCheck();
         }
         public void InitializeDoxygen()
         {
@@ -71,8 +72,45 @@ namespace CodeQualityChecker
 
         public void EqualityOperatorCheck()
         {
-
-        }
+            //This pattern checks for all kinds of comparisons which may happen within conditional or loop statements,
+                //but also including an accidental variable declaration in the form of "=" to be processed later
+            string pattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?:[<>=]=|=|!=|[<>])(?>(?![<>=]=|!=|[<>]).)*?\)";
+            //Counter tuple follows the pattern of filename, linenumber, and errorfound
+            //var counter = new List<Tuple<string, int, bool>>();
+            Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
+            string errorPattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?=)(?>(?![<>=]=|!=|[<>]).)*?\)";
+            Regex e = new Regex(errorPattern, RegexOptions.IgnoreCase);
+            int lineNumber;
+            foreach(CodeFile file in fileList)
+            {
+                Console.WriteLine(file.FileName);
+                lineNumber = 0;
+                foreach (string text in file.FileContent)
+                {
+                    Console.WriteLine(file.FileContent[lineNumber]);
+                    //Matches with lines that use comparison operators
+                    Match m = r.Match(text);
+                    if (m.Success)
+                    {
+                        Match errorMatch = e.Match(text);
+                        if (errorMatch.Success)
+                        {
+                            Console.WriteLine(lineNumber + " True: ");
+                            file.ComparisonStatements.Add(new Tuple<int, bool>(lineNumber, true));
+                            //counter.Add(new Tuple<string, int, bool>(file.FileName, lineNumber, true));
+                        }
+                        else
+                        {
+                            Console.WriteLine(lineNumber + " False " );
+                            file.ComparisonStatements.Add(new Tuple<int, bool>(lineNumber, false));
+                            //counter.Add(new Tuple<string, int, bool>(file.FileName, lineNumber, false));
+                        }
+                    }
+                    
+                    lineNumber++;
+                }
+            }
+        }  
 
         public void MethodFinder()
         {
