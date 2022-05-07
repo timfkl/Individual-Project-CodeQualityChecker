@@ -128,7 +128,9 @@ namespace CodeQualityChecker
             if (fileList.Count() > 0)
             {
                 runTests = new Tester(fileList);
-                runTests.RunTests();
+                var testResults = runTests.RunTests();
+                var m = new ResultsForm(testResults);
+                m.Show();
             }
         }
         /**

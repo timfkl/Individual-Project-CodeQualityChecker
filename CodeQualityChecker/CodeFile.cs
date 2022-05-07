@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace CodeQualityChecker
 {
-    class CodeFile
+    public class CodeFile
     {
         
         private string _fileName;
         private string[] _fileContent;
         private int[] _fileIndentations;
         private List<Tuple<int, bool>> _comparisonStatements;
+        private List<int> _semicolonErrors;
 
         public CodeFile(string fileName)
         {
@@ -36,5 +37,9 @@ namespace CodeQualityChecker
          *The integer is the line number (starting from 0), and the bool being true means that the comparison uses = instead of a normal operator
          */
         public List<Tuple<int, bool>> ComparisonStatements { get => _comparisonStatements; set => _comparisonStatements = value; }
+        /**
+         * List of line numbers that have incorrectly placed semicolons
+         */
+        public List<int> SemicolonErrors { get => _semicolonErrors; set => _semicolonErrors = value; }
     }
 }

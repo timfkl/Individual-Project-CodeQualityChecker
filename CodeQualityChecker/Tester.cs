@@ -21,17 +21,18 @@ namespace CodeQualityChecker
             this.fileList = fileList;
         }
 
-        public void RunTests() 
+        public List<CodeFile> RunTests() 
         {
             InitializeFileListContent();
             CheckSpaces();
             EqualityOperatorCheck();
+            
+            return fileList;
         }
-        public void InitializeDoxygen()
-        {
-
-        }
-
+        
+        /**
+         * Accesses each file and turns the file contents into an array where each line is one string
+         */
         public void InitializeFileListContent()
         {
             foreach (CodeFile file in fileList){
@@ -53,7 +54,10 @@ namespace CodeQualityChecker
             }
         }
 
-        public int[] CheckSpacesHelper(string[] fileContent)
+        /**
+         * Helper function for CheckSpaces() to more easily iterate through each file
+         */
+        private int[] CheckSpacesHelper(string[] fileContent)
         {
             int[] indentList = new int[fileContent.Length];
             int spaceCount = 0;
@@ -69,14 +73,16 @@ namespace CodeQualityChecker
             return indentList;
         }
 
-
+        /**
+         * Checks line by line if the code contains a conditional or loop statement using comparisons as well as incorrect = operators.
+         * It then through those comparisons to see which ones act more like a variable declaration.
+         */
         public void EqualityOperatorCheck()
         {
             //This pattern checks for all kinds of comparisons which may happen within conditional or loop statements,
                 //but also including an accidental variable declaration in the form of "=" to be processed later
             string pattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?:[<>=]=|=|!=|[<>])(?>(?![<>=]=|!=|[<>]).)*?\)";
-            //Counter tuple follows the pattern of filename, linenumber, and errorfound
-            //var counter = new List<Tuple<string, int, bool>>();
+            
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
             string errorPattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?=)(?>(?![<>=]=|!=|[<>]).)*?\)";
             Regex e = new Regex(errorPattern, RegexOptions.IgnoreCase);
@@ -97,13 +103,13 @@ namespace CodeQualityChecker
                         {
                             Console.WriteLine(lineNumber + " True: ");
                             file.ComparisonStatements.Add(new Tuple<int, bool>(lineNumber, true));
-                            //counter.Add(new Tuple<string, int, bool>(file.FileName, lineNumber, true));
+                            
                         }
                         else
                         {
                             Console.WriteLine(lineNumber + " False " );
                             file.ComparisonStatements.Add(new Tuple<int, bool>(lineNumber, false));
-                            //counter.Add(new Tuple<string, int, bool>(file.FileName, lineNumber, false));
+                            
                         }
                     }
                     
@@ -112,6 +118,30 @@ namespace CodeQualityChecker
             }
         }  
 
+        public void SemicolonCheck()
+        {
+            string pattern = @";([^\s|/])";
+            Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
+            int lineNumber;
+
+            foreach(CodeFile file in fileList)
+            {
+                lineNumber = 0;
+                foreach(string text in file.FileContent)
+                {
+                    Match m = r.Match(text);
+                    if (m.Success)
+                    {
+                        file.SemicolonErrors.Add(lineNumber);
+                    }
+                    lineNumber++;
+                }
+            }
+        }
+        
+        
+        
+        
         public void MethodFinder()
         {
 
