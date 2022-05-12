@@ -19,7 +19,7 @@ namespace CodeQualityChecker
         private OpenFileDialog fileSelectionDialog = new OpenFileDialog();
         private string doxygenFile;
         private OpenFileDialog doxygenFileSelect = new OpenFileDialog();
-        Tester runTests;
+        List<string> passedFileNames = new List<string>();
 
         public SelectionForm()
         {
@@ -38,7 +38,8 @@ namespace CodeQualityChecker
 
         private void InitializeFileSelect()
         {
-            this.fileSelectionDialog.Filter = "Text files(*.txt)| *.txt| All files(*.*)| *.*| C++ Source(*.cpp)| *.cpp| C/C++ Header(*.h)| *.h";
+            //this.fileSelectionDialog.Filter = "C++ Source(*.cpp)| *.cpp| C/C++ Header(*.h)| *.h| All files(*.*)| *.*";
+            this.fileSelectionDialog.Filter = "C++ Source|*.cpp;*.h;*.cc;*.c++;*.C;*.cp;*.cxx;*.hpp;*.hh;*.inl| All files(*.*)| *.*";
             this.fileSelectionDialog.Multiselect = true;
             this.fileSelectionDialog.Title = "Select Code Files";
 
@@ -49,7 +50,6 @@ namespace CodeQualityChecker
 
         private void FileSelect_Click(object sender, EventArgs e)
         {
-
             DialogResult dr = this.fileSelectionDialog.ShowDialog();
             if (dr == System.Windows.Forms.DialogResult.OK)
             {
@@ -59,11 +59,16 @@ namespace CodeQualityChecker
                     
                     try
                     {
-                        fileList.Add(new CodeFile(file));
-                        //string temp = File.ReadAllText(file);
-                        Console.WriteLine(file);
-                        //Console.WriteLine(temp);
-                        //string temp = MessageBox.Show();
+                        if (!FileDisplay.Text.Contains(file))
+                        {
+                            fileList.Add(new CodeFile(file));
+                            passedFileNames.Add(file);
+                            //string temp = File.ReadAllText(file);
+                            Console.WriteLine(file);
+                            //Console.WriteLine(temp);
+                            //string temp = MessageBox.Show();
+                        }
+
                     }
                     catch (SecurityException ex)
                     {
@@ -84,10 +89,15 @@ namespace CodeQualityChecker
                     }
                 }
                 
-                FileDisplay.Text = String.Join(Environment.NewLine, fileList);
+                FileDisplay.Text = String.Join(Environment.NewLine, passedFileNames);
                 
             }
             
+        }
+        private void UnselectButton_Click(object sender, EventArgs e)
+        {
+            fileList.Clear();
+            FileDisplay.Text = "No files selected";
         }
 
         private void FindDoxygen_Click(object sender, EventArgs e)
@@ -127,9 +137,9 @@ namespace CodeQualityChecker
         {
             if (fileList.Count() > 0)
             {
-                runTests = new Tester(fileList);
-                var testResults = runTests.RunTests();
-                var m = new ResultsForm(testResults);
+                //runTests = new Tester(fileList);
+                //var testResults = runTests.RunTests();
+                var m = new ResultsForm(fileList);
                 m.Show();
             }
         }
@@ -166,5 +176,7 @@ namespace CodeQualityChecker
                 }*/
             }
         }
+
+        
     }
 }

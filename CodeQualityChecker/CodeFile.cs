@@ -14,11 +14,15 @@ namespace CodeQualityChecker
         private int[] _fileIndentations;
         private List<Tuple<int, bool>> _comparisonStatements;
         private List<int> _semicolonErrors;
-
+        private List<Tuple<int, bool, string>> _classInstances;
+        private int _emptyLineCount;
         public CodeFile(string fileName)
         {
             FileName = fileName;
             _comparisonStatements = new List<Tuple<int, bool>>();
+            _semicolonErrors = new List<int>();
+            _classInstances = new List<Tuple<int, bool, string>>();
+
         }
         /**
          * The name of the file including directory
@@ -41,5 +45,7 @@ namespace CodeQualityChecker
          * List of line numbers that have incorrectly placed semicolons
          */
         public List<int> SemicolonErrors { get => _semicolonErrors; set => _semicolonErrors = value; }
+        public List<Tuple<int,bool, string>> ClassInstances { get => _classInstances; set => _classInstances = value; }
+        public int EmptyLineCount { get => _emptyLineCount; set => _emptyLineCount = value; }
     }
 }
