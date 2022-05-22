@@ -33,11 +33,14 @@ namespace CodeQualityChecker
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.SpacingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numOfClassesDisplay = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.classCheckDisplay = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.badSemicolonLineDisplay = new System.Windows.Forms.RichTextBox();
+            this.badSemicolonLine = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.badSemicolonDisplay = new System.Windows.Forms.Label();
@@ -52,15 +55,12 @@ namespace CodeQualityChecker
             this.emptyLineDisplay = new System.Windows.Forms.Label();
             this.equalityAssessDisplay = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.SpacingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numOfClassesDisplay = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpacingChart)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.spacingBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpacingChart)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -76,6 +76,22 @@ namespace CodeQualityChecker
             this.mainPanel.Size = new System.Drawing.Size(776, 426);
             this.mainPanel.TabIndex = 2;
             // 
+            // SpacingChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.SpacingChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.SpacingChart.Legends.Add(legend1);
+            this.SpacingChart.Location = new System.Drawing.Point(367, 212);
+            this.SpacingChart.Name = "SpacingChart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.SpacingChart.Series.Add(series1);
+            this.SpacingChart.Size = new System.Drawing.Size(346, 204);
+            this.SpacingChart.TabIndex = 2;
+            this.SpacingChart.Text = "Code Spacing Chart";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.numOfClassesDisplay);
@@ -88,6 +104,24 @@ namespace CodeQualityChecker
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Naming Conventions:";
+            // 
+            // numOfClassesDisplay
+            // 
+            this.numOfClassesDisplay.AutoSize = true;
+            this.numOfClassesDisplay.Location = new System.Drawing.Point(200, 30);
+            this.numOfClassesDisplay.Name = "numOfClassesDisplay";
+            this.numOfClassesDisplay.Size = new System.Drawing.Size(16, 17);
+            this.numOfClassesDisplay.TabIndex = 8;
+            this.numOfClassesDisplay.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(137, 17);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "# of Classes Found: ";
             // 
             // label14
             // 
@@ -109,7 +143,7 @@ namespace CodeQualityChecker
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.badSemicolonLineDisplay);
+            this.groupBox1.Controls.Add(this.badSemicolonLine);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.badSemicolonDisplay);
@@ -120,14 +154,14 @@ namespace CodeQualityChecker
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Potential Misplaced Semicolons:";
             // 
-            // badSemicolonLineDisplay
+            // badSemicolonLine
             // 
-            this.badSemicolonLineDisplay.Location = new System.Drawing.Point(22, 106);
-            this.badSemicolonLineDisplay.Name = "badSemicolonLineDisplay";
-            this.badSemicolonLineDisplay.ReadOnly = true;
-            this.badSemicolonLineDisplay.Size = new System.Drawing.Size(216, 66);
-            this.badSemicolonLineDisplay.TabIndex = 8;
-            this.badSemicolonLineDisplay.Text = "";
+            this.badSemicolonLine.Location = new System.Drawing.Point(22, 106);
+            this.badSemicolonLine.Name = "badSemicolonLine";
+            this.badSemicolonLine.ReadOnly = true;
+            this.badSemicolonLine.Size = new System.Drawing.Size(216, 66);
+            this.badSemicolonLine.TabIndex = 8;
+            this.badSemicolonLine.Text = "";
             // 
             // label1
             // 
@@ -150,7 +184,7 @@ namespace CodeQualityChecker
             // badSemicolonDisplay
             // 
             this.badSemicolonDisplay.AutoSize = true;
-            this.badSemicolonDisplay.Location = new System.Drawing.Point(189, 62);
+            this.badSemicolonDisplay.Location = new System.Drawing.Point(199, 62);
             this.badSemicolonDisplay.Name = "badSemicolonDisplay";
             this.badSemicolonDisplay.Size = new System.Drawing.Size(16, 17);
             this.badSemicolonDisplay.TabIndex = 6;
@@ -263,22 +297,6 @@ namespace CodeQualityChecker
             this.label2.TabIndex = 3;
             this.label2.Text = "Use of Equality Operators";
             // 
-            // SpacingChart
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.SpacingChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.SpacingChart.Legends.Add(legend1);
-            this.SpacingChart.Location = new System.Drawing.Point(367, 212);
-            this.SpacingChart.Name = "SpacingChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.SpacingChart.Series.Add(series1);
-            this.SpacingChart.Size = new System.Drawing.Size(346, 204);
-            this.SpacingChart.TabIndex = 2;
-            this.SpacingChart.Text = "Code Spacing Chart";
-            // 
             // panel2
             // 
             this.panel2.Enabled = false;
@@ -287,24 +305,6 @@ namespace CodeQualityChecker
             this.panel2.Size = new System.Drawing.Size(379, 302);
             this.panel2.TabIndex = 5;
             this.panel2.Visible = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 30);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(137, 17);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "# of Classes Found: ";
-            // 
-            // numOfClassesDisplay
-            // 
-            this.numOfClassesDisplay.AutoSize = true;
-            this.numOfClassesDisplay.Location = new System.Drawing.Point(200, 30);
-            this.numOfClassesDisplay.Name = "numOfClassesDisplay";
-            this.numOfClassesDisplay.Size = new System.Drawing.Size(16, 17);
-            this.numOfClassesDisplay.TabIndex = 8;
-            this.numOfClassesDisplay.Text = "0";
             // 
             // ResultsForm
             // 
@@ -318,13 +318,13 @@ namespace CodeQualityChecker
             this.Load += new System.EventHandler(this.ResultsForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpacingChart)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.spacingBox.ResumeLayout(false);
             this.spacingBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpacingChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -348,7 +348,7 @@ namespace CodeQualityChecker
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label badSemicolonDisplay;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox badSemicolonLineDisplay;
+        private System.Windows.Forms.RichTextBox badSemicolonLine;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label classCheckDisplay;

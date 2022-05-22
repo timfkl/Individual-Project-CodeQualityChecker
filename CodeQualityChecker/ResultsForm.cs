@@ -35,15 +35,19 @@ namespace CodeQualityChecker
 
         private void RunDisplayGraphics()
         {
+            SpacingChart.Hide();
             IndentationStatistics();
             DisplayEqualityOpAssessment();
             DisplaySemicolonAssessment();
             DisplayNamingConventionTest();
         }
-
+        /**
+         * Partially implemented but caused too many errors 
+         */
         private void DrawSpacingGraph()
         {
             SpacingChart.Series.Clear();
+            
             List<Series> seriesList = new List<Series>();
             var tempSeries = new Series();
             int i = 0;
@@ -69,8 +73,6 @@ namespace CodeQualityChecker
 
             foreach (CodeFile file in fileList)
             {
-
-                
                 switch (i)
                 {
                     case 0:
@@ -99,11 +101,10 @@ namespace CodeQualityChecker
                 seriesList.Append(tempSeries);
                 this.SpacingChart.Series.Add(tempSeries);
             }
-
-
-
         }
-
+        /**
+         * Displays various statistics about the use of indentation
+         */
         private void IndentationStatistics()
         {
             int totalEmptyLines = 0;
@@ -128,10 +129,16 @@ namespace CodeQualityChecker
             maxIndentDisplay.Text = maximumIndent.ToString();
             totalLinesDisplay.Text = totalLines.ToString();
         }
+        /**
+         * Helper function to trim down the file name
+         */
         private string TrimFileName(CodeFile file)
         {
             return Path.GetFileName(file.FileName);
         }
+        /**
+         * Displays information about Comparison statements and whether they act as variable declarations instead
+         */
         private void DisplayEqualityOpAssessment()
         {
             equalityAssessDisplay.Text = "";
@@ -156,7 +163,9 @@ namespace CodeQualityChecker
             equalityAssessDisplay.Text = textDisplay;
             
         }
-
+        /**
+         * Displays information about if any weirdly placed semicolons are found
+         */
         private void DisplaySemicolonAssessment()
         {
             int totalWeirdSemicolons = 0;
@@ -164,13 +173,20 @@ namespace CodeQualityChecker
             foreach(CodeFile file in fileList)
             {
                 totalWeirdSemicolons += file.SemicolonErrors.Count;
-                badSemicolonLineDisplay.Text += String.Join<int>(", ", file.SemicolonErrors.AsEnumerable());
-                badSemicolonLineDisplay.Text += "\n";
+                badSemicolonLine.Text += String.Join<int>(", ", file.SemicolonErrors.AsEnumerable());
+                badSemicolonLine.Text += "\n";
             }
             badSemicolonDisplay.Text = totalWeirdSemicolons.ToString();
+            if (totalWeirdSemicolons == 0)
+            {
+                badSemicolonLine.Hide();
+            }
+            
             
         }
-
+        /**
+         * Displays information about whether any classes dont start with a capital letter, and then displays the name
+         */
         private void DisplayNamingConventionTest()
         {
             int numberOfClasses = 0;

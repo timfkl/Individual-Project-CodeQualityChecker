@@ -19,7 +19,7 @@ namespace CodeQualityChecker
         private OpenFileDialog fileSelectionDialog = new OpenFileDialog();
         private string doxygenFile;
         private OpenFileDialog doxygenFileSelect = new OpenFileDialog();
-        List<string> passedFileNames = new List<string>();
+        private List<string> passedFileNames = new List<string>();
 
         public SelectionForm()
         {
@@ -28,7 +28,7 @@ namespace CodeQualityChecker
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void SelectionForm_Load(object sender, EventArgs e)
         {
 
             InitializeFileSelect();
@@ -59,16 +59,15 @@ namespace CodeQualityChecker
                     
                     try
                     {
+                        //Checks if the File has already been included
                         if (!FileDisplay.Text.Contains(file))
                         {
+                            //Create CodeFile object instance from file name
                             fileList.Add(new CodeFile(file));
+                            //Add string of file name to a list for display
                             passedFileNames.Add(file);
-                            //string temp = File.ReadAllText(file);
                             Console.WriteLine(file);
-                            //Console.WriteLine(temp);
-                            //string temp = MessageBox.Show();
                         }
-
                     }
                     catch (SecurityException ex)
                     {

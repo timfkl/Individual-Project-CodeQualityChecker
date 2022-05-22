@@ -60,9 +60,6 @@ namespace CodeQualityChecker
                 file.FileIndentations[lineNum] = spaceCount;
                 lineNum++;
             }
-            
-            
-            
         }
 
 
@@ -77,7 +74,6 @@ namespace CodeQualityChecker
                 //but also including an accidental variable declaration in the form of "=" to be processed later
             string pattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?:[<>=]=|=|!=|[<>])(?>(?![<>=]=|!=|[<>]).)*?\)";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
-            //string errorPattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?=)(?>(?![<>=]=|!=|[<>]).)*?\)";
             string errorPattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?:=)(?>(?![<>=]|!=|[<>]).)[^;]*?\)";
             Regex e = new Regex(errorPattern, RegexOptions.IgnoreCase);
             int lineNumber;
@@ -100,7 +96,6 @@ namespace CodeQualityChecker
                 }    
                 lineNumber++;
             }
-            
         }  
 
         private void SemicolonCheck(CodeFile file)

@@ -31,6 +31,7 @@ namespace CodeQualityChecker
         {
             this.Test = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.UnselectButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.RunDoxygen = new System.Windows.Forms.Button();
@@ -39,13 +40,13 @@ namespace CodeQualityChecker
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.FileDisplay = new System.Windows.Forms.RichTextBox();
             this.FileSelect = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Test
             // 
             this.Test.BackColor = System.Drawing.SystemColors.Window;
+            this.Test.CheckOnClick = true;
             this.Test.FormattingEnabled = true;
             this.Test.Items.AddRange(new object[] {
             "Assess Spacing",
@@ -56,7 +57,6 @@ namespace CodeQualityChecker
             this.Test.Location = new System.Drawing.Point(16, 62);
             this.Test.MinimumSize = new System.Drawing.Size(200, 140);
             this.Test.Name = "Test";
-            this.Test.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.Test.Size = new System.Drawing.Size(200, 140);
             this.Test.TabIndex = 0;
             // 
@@ -76,6 +76,15 @@ namespace CodeQualityChecker
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(775, 350);
             this.panel1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Tests Run";
             // 
             // UnselectButton
             // 
@@ -156,15 +165,6 @@ namespace CodeQualityChecker
             this.FileSelect.UseVisualStyleBackColor = true;
             this.FileSelect.Click += new System.EventHandler(this.FileSelect_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Tests Run";
-            // 
             // SelectionForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -174,7 +174,7 @@ namespace CodeQualityChecker
             this.MinimumSize = new System.Drawing.Size(818, 428);
             this.Name = "SelectionForm";
             this.Text = "Automated Code Quality Checker";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.SelectionForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
