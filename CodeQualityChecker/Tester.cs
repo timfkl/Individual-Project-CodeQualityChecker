@@ -52,12 +52,12 @@ namespace CodeQualityChecker
         {
             var fileContent = file.FileContent;
             int spaceCount = 0;
-            int lineNum = 0;
+            int lineNum = 1;
             file.FileIndentations = new int[fileContent.Length];
             foreach (string line in fileContent)
             {
                 spaceCount = line.TakeWhile(Char.IsWhiteSpace).Count();
-                file.FileIndentations[lineNum] = spaceCount;
+                file.FileIndentations[lineNum-1] = spaceCount;
                 lineNum++;
             }
         }
@@ -77,7 +77,7 @@ namespace CodeQualityChecker
             string errorPattern = @"\((?>(?![<>=]=|!=|[<>]).)*?(?:=)(?>(?![<>=]|!=|[<>]).)[^;]*?\)";
             Regex e = new Regex(errorPattern, RegexOptions.IgnoreCase);
             int lineNumber;
-            lineNumber = 0;
+            lineNumber = 1;
             foreach (string text in file.FileContent)
             {
                 //Matches with lines that use comparison operators
@@ -88,6 +88,7 @@ namespace CodeQualityChecker
                     if (errorMatch.Success)
                     {
                         file.ComparisonStatements.Add(new Tuple<int, bool>(lineNumber, true));
+                        Console.WriteLine(errorMatch.Value);
                     }
                     else
                     {
@@ -97,12 +98,14 @@ namespace CodeQualityChecker
                 lineNumber++;
             }
         }  
-
+        /**
+         * Checks for misplaced semicolons in the middle of lines. Unfortunately also catches them in for loops
+         */
         private void SemicolonCheck(CodeFile file)
         {
             string pattern = @";([^\s|/])";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
-            int lineNumber = 0;
+            int lineNumber = 1;
             foreach(string text in file.FileContent)
             {
                 Match m = r.Match(text);
@@ -121,7 +124,7 @@ namespace CodeQualityChecker
         {
             string pattern = @"^(^|\s)(public|private|protected)\s\w+";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
-            int lineNumber = 0;
+            int lineNumber = 1;
             foreach(string text in file.FileContent)
             {
                 Match m = r.Match(text);
@@ -139,7 +142,7 @@ namespace CodeQualityChecker
         {
             string pattern = @"^(^|\s*)(class)\s(\w+)\s*({|:|$|\/)";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
-            int lineNumber = 0;
+            int lineNumber = 1;
             foreach (string text in file.FileContent)
             {
                 Match m = r.Match(text);

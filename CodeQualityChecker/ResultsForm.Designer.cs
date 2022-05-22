@@ -29,9 +29,9 @@ namespace CodeQualityChecker
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.SpacingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -54,23 +54,29 @@ namespace CodeQualityChecker
             this.label3 = new System.Windows.Forms.Label();
             this.emptyLineDisplay = new System.Windows.Forms.Label();
             this.equalityAssessDisplay = new System.Windows.Forms.RichTextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.totalComparisonDisplay = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.varEqualNumDisplay = new System.Windows.Forms.Label();
+            this.classNameDisplay = new System.Windows.Forms.RichTextBox();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpacingChart)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.spacingBox.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.groupBox3);
             this.mainPanel.Controls.Add(this.SpacingChart);
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.groupBox1);
             this.mainPanel.Controls.Add(this.spacingBox);
-            this.mainPanel.Controls.Add(this.equalityAssessDisplay);
-            this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Location = new System.Drawing.Point(12, 12);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(776, 426);
@@ -78,29 +84,30 @@ namespace CodeQualityChecker
             // 
             // SpacingChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.SpacingChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.SpacingChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.SpacingChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.SpacingChart.Legends.Add(legend2);
             this.SpacingChart.Location = new System.Drawing.Point(367, 212);
             this.SpacingChart.Name = "SpacingChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.SpacingChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.SpacingChart.Series.Add(series2);
             this.SpacingChart.Size = new System.Drawing.Size(346, 204);
             this.SpacingChart.TabIndex = 2;
             this.SpacingChart.Text = "Code Spacing Chart";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.classNameDisplay);
             this.groupBox2.Controls.Add(this.numOfClassesDisplay);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.classCheckDisplay);
             this.groupBox2.Location = new System.Drawing.Point(9, 220);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(273, 143);
+            this.groupBox2.Size = new System.Drawing.Size(273, 170);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Naming Conventions:";
@@ -143,20 +150,21 @@ namespace CodeQualityChecker
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.badSemicolonLine);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.badSemicolonDisplay);
             this.groupBox1.Location = new System.Drawing.Point(288, 19);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(278, 187);
+            this.groupBox1.Size = new System.Drawing.Size(243, 187);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Potential Misplaced Semicolons:";
             // 
             // badSemicolonLine
             // 
-            this.badSemicolonLine.Location = new System.Drawing.Point(22, 106);
+            this.badSemicolonLine.Location = new System.Drawing.Point(9, 104);
             this.badSemicolonLine.Name = "badSemicolonLine";
             this.badSemicolonLine.ReadOnly = true;
             this.badSemicolonLine.Size = new System.Drawing.Size(216, 66);
@@ -168,14 +176,14 @@ namespace CodeQualityChecker
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(273, 17);
+            this.label1.Size = new System.Drawing.Size(177, 17);
             this.label1.TabIndex = 7;
-            this.label1.Text = "(Can also be semicolons in for statement) ";
+            this.label1.Text = "(Can also be semicolons in";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 62);
+            this.label12.Location = new System.Drawing.Point(6, 75);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(187, 17);
             this.label12.TabIndex = 5;
@@ -184,7 +192,7 @@ namespace CodeQualityChecker
             // badSemicolonDisplay
             // 
             this.badSemicolonDisplay.AutoSize = true;
-            this.badSemicolonDisplay.Location = new System.Drawing.Point(199, 62);
+            this.badSemicolonDisplay.Location = new System.Drawing.Point(199, 75);
             this.badSemicolonDisplay.Name = "badSemicolonDisplay";
             this.badSemicolonDisplay.Size = new System.Drawing.Size(16, 17);
             this.badSemicolonDisplay.TabIndex = 6;
@@ -281,21 +289,12 @@ namespace CodeQualityChecker
             // 
             // equalityAssessDisplay
             // 
-            this.equalityAssessDisplay.Location = new System.Drawing.Point(575, 53);
+            this.equalityAssessDisplay.Location = new System.Drawing.Point(6, 104);
             this.equalityAssessDisplay.Name = "equalityAssessDisplay";
             this.equalityAssessDisplay.ReadOnly = true;
-            this.equalityAssessDisplay.Size = new System.Drawing.Size(183, 120);
+            this.equalityAssessDisplay.Size = new System.Drawing.Size(224, 66);
             this.equalityAssessDisplay.TabIndex = 4;
             this.equalityAssessDisplay.Text = "";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(587, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Use of Equality Operators";
             // 
             // panel2
             // 
@@ -305,6 +304,74 @@ namespace CodeQualityChecker
             this.panel2.Size = new System.Drawing.Size(379, 302);
             this.panel2.TabIndex = 5;
             this.panel2.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.varEqualNumDisplay);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.totalComparisonDisplay);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.equalityAssessDisplay);
+            this.groupBox3.Location = new System.Drawing.Point(537, 19);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(236, 187);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Use of Equality Operators";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(198, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Total Comparison Statements:\r\n";
+            // 
+            // totalComparisonDisplay
+            // 
+            this.totalComparisonDisplay.AutoSize = true;
+            this.totalComparisonDisplay.Location = new System.Drawing.Point(204, 34);
+            this.totalComparisonDisplay.Name = "totalComparisonDisplay";
+            this.totalComparisonDisplay.Size = new System.Drawing.Size(16, 17);
+            this.totalComparisonDisplay.TabIndex = 6;
+            this.totalComparisonDisplay.Text = "0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 51);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(110, 17);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "\"for\" statement) ";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(0, 64);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(158, 17);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Comparisons using \"=\": ";
+            // 
+            // varEqualNumDisplay
+            // 
+            this.varEqualNumDisplay.AutoSize = true;
+            this.varEqualNumDisplay.Location = new System.Drawing.Point(204, 64);
+            this.varEqualNumDisplay.Name = "varEqualNumDisplay";
+            this.varEqualNumDisplay.Size = new System.Drawing.Size(16, 17);
+            this.varEqualNumDisplay.TabIndex = 8;
+            this.varEqualNumDisplay.Text = "0";
+            // 
+            // classNameDisplay
+            // 
+            this.classNameDisplay.Location = new System.Drawing.Point(9, 89);
+            this.classNameDisplay.Name = "classNameDisplay";
+            this.classNameDisplay.ReadOnly = true;
+            this.classNameDisplay.Size = new System.Drawing.Size(216, 66);
+            this.classNameDisplay.TabIndex = 10;
+            this.classNameDisplay.Text = "";
             // 
             // ResultsForm
             // 
@@ -317,7 +384,6 @@ namespace CodeQualityChecker
             this.Text = "Results Form";
             this.Load += new System.EventHandler(this.ResultsForm_Load);
             this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpacingChart)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -325,6 +391,8 @@ namespace CodeQualityChecker
             this.groupBox1.PerformLayout();
             this.spacingBox.ResumeLayout(false);
             this.spacingBox.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -332,7 +400,6 @@ namespace CodeQualityChecker
         #endregion
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.DataVisualization.Charting.Chart SpacingChart;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox equalityAssessDisplay;
         private System.Windows.Forms.Label emptyLineDisplay;
         private System.Windows.Forms.Label label3;
@@ -354,5 +421,12 @@ namespace CodeQualityChecker
         private System.Windows.Forms.Label classCheckDisplay;
         private System.Windows.Forms.Label numOfClassesDisplay;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label totalComparisonDisplay;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label varEqualNumDisplay;
+        private System.Windows.Forms.RichTextBox classNameDisplay;
     }
 }

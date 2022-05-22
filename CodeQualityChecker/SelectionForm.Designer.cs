@@ -37,9 +37,11 @@ namespace CodeQualityChecker
             this.RunDoxygen = new System.Windows.Forms.Button();
             this.FindDoxygen = new System.Windows.Forms.Button();
             this.RunButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.doxyFileDisplay = new System.Windows.Forms.TextBox();
             this.FileDisplay = new System.Windows.Forms.RichTextBox();
             this.FileSelect = new System.Windows.Forms.Button();
+            this.testName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,13 +64,15 @@ namespace CodeQualityChecker
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.testName);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.UnselectButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.RunDoxygen);
             this.panel1.Controls.Add(this.FindDoxygen);
             this.panel1.Controls.Add(this.RunButton);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.doxyFileDisplay);
             this.panel1.Controls.Add(this.FileDisplay);
             this.panel1.Controls.Add(this.FileSelect);
             this.panel1.Controls.Add(this.Test);
@@ -82,9 +86,9 @@ namespace CodeQualityChecker
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.Size = new System.Drawing.Size(89, 17);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Tests Run";
+            this.label2.Text = "Tests to Run";
             // 
             // UnselectButton
             // 
@@ -136,14 +140,15 @@ namespace CodeQualityChecker
             this.RunButton.UseVisualStyleBackColor = true;
             this.RunButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
-            // textBox1
+            // doxyFileDisplay
             // 
-            this.textBox1.Location = new System.Drawing.Point(250, 100);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(149, 22);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "No file selected";
+            this.doxyFileDisplay.Location = new System.Drawing.Point(250, 100);
+            this.doxyFileDisplay.Multiline = true;
+            this.doxyFileDisplay.Name = "doxyFileDisplay";
+            this.doxyFileDisplay.ReadOnly = true;
+            this.doxyFileDisplay.Size = new System.Drawing.Size(149, 22);
+            this.doxyFileDisplay.TabIndex = 3;
+            this.doxyFileDisplay.Text = "No file selected";
             // 
             // FileDisplay
             // 
@@ -164,6 +169,25 @@ namespace CodeQualityChecker
             this.FileSelect.Text = "Select Files";
             this.FileSelect.UseVisualStyleBackColor = true;
             this.FileSelect.Click += new System.EventHandler(this.FileSelect_Click);
+            // 
+            // testName
+            // 
+            this.testName.Location = new System.Drawing.Point(481, 34);
+            this.testName.MaxLength = 50;
+            this.testName.Multiline = true;
+            this.testName.Name = "testName";
+            this.testName.Size = new System.Drawing.Size(193, 22);
+            this.testName.TabIndex = 10;
+            this.testName.Text = "Test Name (optional)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 205);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(166, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "(Currently Nonfunctional)";
             // 
             // SelectionForm
             // 
@@ -186,7 +210,7 @@ namespace CodeQualityChecker
         private System.Windows.Forms.CheckedListBox Test;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button FileSelect;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox doxyFileDisplay;
         private System.Windows.Forms.RichTextBox FileDisplay;
         private System.Windows.Forms.Button RunButton;
         private System.Windows.Forms.Button FindDoxygen;
@@ -194,6 +218,8 @@ namespace CodeQualityChecker
         private System.Windows.Forms.Button UnselectButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox testName;
     }
 }
 

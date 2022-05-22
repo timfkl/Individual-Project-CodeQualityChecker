@@ -20,7 +20,7 @@ namespace CodeQualityChecker
         private string doxygenFile;
         private OpenFileDialog doxygenFileSelect = new OpenFileDialog();
         private List<string> passedFileNames = new List<string>();
-
+        private ResultsForm result;
         public SelectionForm()
         {
             fileSelectionDialog = new OpenFileDialog();
@@ -39,6 +39,16 @@ namespace CodeQualityChecker
         private void InitializeFileSelect()
         {
             //this.fileSelectionDialog.Filter = "C++ Source(*.cpp)| *.cpp| C/C++ Header(*.h)| *.h| All files(*.*)| *.*";
+            try
+            {
+                //this.fileSelectionDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                this.doxygenFileSelect.InitialDirectory = "%ProgramFiles%";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("This should never happen: " + e);
+            }
+            
             this.fileSelectionDialog.Filter = "C++ Source|*.cpp;*.h;*.cc;*.c++;*.C;*.cp;*.cxx;*.hpp;*.hh;*.inl| All files(*.*)| *.*";
             this.fileSelectionDialog.Multiselect = true;
             this.fileSelectionDialog.Title = "Select Code Files";
@@ -123,6 +133,7 @@ namespace CodeQualityChecker
                         "it may be corrupt.\n\nReported error: " + ex.Message);
                 }
             }
+            doxyFileDisplay.Text = doxygenFile;
         }
 
         private void FileDisplay_TextChanged(object sender, EventArgs e)
@@ -131,15 +142,25 @@ namespace CodeQualityChecker
         }
         /**
          * Runs the Tests if there are any files already selected
+         * Does work to open multiple windows
          */
         private void RunButton_Click(object sender, EventArgs e)
         {
             if (fileList.Count() > 0)
             {
-                //runTests = new Tester(fileList);
-                //var testResults = runTests.RunTests();
-                var m = new ResultsForm(fileList);
-                m.Show();
+                /*if (result == null || result.IsDisposed)
+                {
+                    //result = new ResultsForm(fileList);
+                }
+                else
+                {
+                    string message = "Results window still open";
+                    //MessageBox.Show()
+                }*/
+                result = new ResultsForm(fileList);
+                result.Text = "Results Form - " + testName.Text;
+                result.Show();
+                result.BringToFront();
             }
         }
         /**

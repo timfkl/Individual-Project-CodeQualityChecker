@@ -148,18 +148,36 @@ namespace CodeQualityChecker
             //string errorList = "";
             foreach (CodeFile file in fileList) {
                 operatorCount += file.ComparisonStatements.Count;
-                
+                if (trueCount.Count > 0)
+                {
+                    textDisplay += "\n";
+                }
                 foreach (var operation in file.ComparisonStatements)
                 {
+                    int i = 0;
                     if (operation.Item2 == true)
                     {
+                        if(i > 0)
+                        {
+                            textDisplay += ", ";
+                        }
                         trueCount.Add(new Tuple<string,int>(file.FileName,operation.Item1));
-
+                        if (i == 0)
+                        {
+                            textDisplay += TrimFileName(file) + ": ";
+                        }
+                        textDisplay += operation.Item1;
+                        
                     }
                 }
                 
             }
-            textDisplay = trueCount.Count + " out of " + operatorCount + " comparison statements use the wrong equality operator";
+            totalComparisonDisplay.Text = operatorCount.ToString();
+            varEqualNumDisplay.Text = trueCount.Count.ToString();
+            /*if(trueCount.Count == 0)
+            {
+                equalityAssessDisplay.Hide();
+            }*/
             equalityAssessDisplay.Text = textDisplay;
             
         }
@@ -172,15 +190,19 @@ namespace CodeQualityChecker
 
             foreach(CodeFile file in fileList)
             {
-                totalWeirdSemicolons += file.SemicolonErrors.Count;
-                badSemicolonLine.Text += String.Join<int>(", ", file.SemicolonErrors.AsEnumerable());
-                badSemicolonLine.Text += "\n";
+                if (file.SemicolonErrors.Count != 0)
+                {
+                    totalWeirdSemicolons += file.SemicolonErrors.Count;
+                    badSemicolonLine.Text += TrimFileName(file) + ": ";
+                    badSemicolonLine.Text += String.Join<int>(", ", file.SemicolonErrors.AsEnumerable());
+                    badSemicolonLine.Text += "\n";
+                }
             }
             badSemicolonDisplay.Text = totalWeirdSemicolons.ToString();
-            if (totalWeirdSemicolons == 0)
+            /*if (totalWeirdSemicolons == 0)
             {
                 badSemicolonLine.Hide();
-            }
+            }*/
             
             
         }
@@ -200,12 +222,13 @@ namespace CodeQualityChecker
                     if (instance.Item2)
                     {
                         numberOfBadNames++;
-                        badClassNames += "Line: " + instance.Item1 + ": " + instance.Item3 + "\n";
+                        badClassNames += TrimFileName(file) + " - Line " + instance.Item1 + ": " + instance.Item3 + "\n";
                     }
                 }
             }
             classCheckDisplay.Text = numberOfBadNames.ToString();
             numOfClassesDisplay.Text = numberOfClasses.ToString();
+            classNameDisplay.Text = badClassNames;
         }
     }
 }
