@@ -66,6 +66,7 @@ namespace CodeQualityChecker
         /**
          * Checks line by line if the code contains a conditional or loop statement using comparisons as well as incorrect = operators.
          * It then through those comparisons to see which ones act more like a variable declaration.
+         * Regex adapted from here: https://stackoverflow.com/questions/30108567/regex-for-comparison-expression
          */
         private void EqualityOperatorCheck(CodeFile file)
         {
@@ -140,7 +141,7 @@ namespace CodeQualityChecker
          */
         private void ClassFinder(CodeFile file)
         {
-            string pattern = @"^(^|\s*)(class)\s(\w+)\s*({|:|$|\/)";
+            string pattern = @"^(^|\s*)(class|struct)\s(\w+)\s*({|:|$|\/)";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
             int lineNumber = 1;
             foreach (string text in file.FileContent)

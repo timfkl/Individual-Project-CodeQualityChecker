@@ -115,6 +115,9 @@ namespace CodeQualityChecker
             foreach (CodeFile file in fileList)
             {
                 totalLines += file.FileContent.Length;
+                if(file.FileContent.Length == 0) {
+                    break;
+                }
                 avgSum += file.FileIndentations.Average();
                 
                 totalEmptyLines += file.EmptyLineCount;

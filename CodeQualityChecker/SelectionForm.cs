@@ -17,7 +17,7 @@ namespace CodeQualityChecker
     {
         private List<CodeFile> fileList;
         private OpenFileDialog fileSelectionDialog = new OpenFileDialog();
-        private string doxygenFile;
+        private string doxygenFile = "";
         private OpenFileDialog doxygenFileSelect = new OpenFileDialog();
         private List<string> passedFileNames = new List<string>();
         private ResultsForm result;
@@ -30,7 +30,7 @@ namespace CodeQualityChecker
 
         private void SelectionForm_Load(object sender, EventArgs e)
         {
-
+            RunDoxygen.Hide();
             InitializeFileSelect();
         }
 
@@ -106,6 +106,7 @@ namespace CodeQualityChecker
         private void UnselectButton_Click(object sender, EventArgs e)
         {
             fileList.Clear();
+            passedFileNames.Clear();
             FileDisplay.Text = "No files selected";
         }
 
